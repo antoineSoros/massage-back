@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Massage{% endblock %}
+
+{% block body %}
+    <h1>Create new Massage</h1>
+
+    {{ include('massage/_form.html.twig') }}
+
+    <a href="{{ path('massage_index') }}">back to list</a>
+{% endblock %}

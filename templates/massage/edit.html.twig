@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Massage{% endblock %}
+
+{% block body %}
+    <h1>Edit Massage</h1>
+
+    {{ include('massage/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('massage_index') }}">back to list</a>
+
+    {{ include('massage/_delete_form.html.twig') }}
+{% endblock %}
