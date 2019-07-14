@@ -26,6 +26,11 @@ class Prestation
      */
     private $massage;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $prestationDate;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Prestation
     public function setMassage(?Massage $massage): self
     {
         $this->massage = $massage;
+
+        return $this;
+    }
+
+    public function getPrestationDate(): ?\DateTimeInterface
+    {
+        return $this->prestationDate;
+    }
+
+    public function setPrestationDate(\DateTimeInterface $prestationDate): self
+    {
+        $this->prestationDate = $prestationDate;
 
         return $this;
     }

@@ -14,6 +14,7 @@ class PrestationType extends AbstractType
         $builder
             ->add('client')
             ->add('massage')
+            ->add('prestationDate')
         ;
     }
 
