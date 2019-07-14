@@ -31,6 +31,11 @@ class Prestation
      */
     private $prestationDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Invoice", inversedBy="prestation")
+     */
+    private $invoice;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -71,4 +76,29 @@ class Prestation
 
         return $this;
     }
+
+    public function getInvoice(): ?Invoice
+    {
+        return $this->invoice;
+    }
+
+    public function setInvoice(?Invoice $invoice): self
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        $date = $this->getPrestationDate()->format("d/m/Y H:i");
+        $client="" ;
+        if($this->getClient()->getProfile()==="SALON"){ $client = $this->getClient()->getCompany()->getCompanyName();}
+        else{
+            $client = $this->getClient()->getFirstname()." ".$this->getClient()->getLastname();
+        }
+
+     return "prestation du ".$date." pour ".$client;
+    }
+
 }

@@ -41,7 +41,7 @@ class Profile
     }
     public function __toString()
     {
-        return $this->getName();
+        return $this->name;
     }
 
 }
