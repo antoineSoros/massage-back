@@ -5,46 +5,39 @@
 {% block body %}
     <h1>Client</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ client.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ client.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ client.mail }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ client.phone }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ client.address }}</td>
-            </tr>
-            <tr>
-                <th>PostCode</th>
-                <td>{{ client.postCode }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ client.city }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('client_index') }}">back to list</a>
-
-    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
-
+    <div class="ui card">
+        <div class="image">
+            <img src="{{ asset('build/images/userIcon.c9b56c09.png') }}">
+        </div>
+        <div class="content">
+            <h4 class="header">
+                {{ client.firstname|upper }} {{ client.lastname |upper}}
+            </h4>
+            <div class="description">
+                <h5 class="ui header">Adresse</h5>
+               <div class="ui list">
+                   <div class="item">{{ client.address }}</div>
+                   <div class="item">{{ client.postCode }}</div>
+                   <div class="item">{{ client.city|upper }}</div>
+        </div>
+                <div class="ui divider"></div>
+                <h5 class="ui header">Mail</h5>
+                <div class="ui list">
+                    <div class="item">{{ client.mail }}</div>
+                </div>
+                <div class="ui divider"></div>
+                <h5 class="ui header">Téléphone</h5>
+                <div class="ui list">
+                    <div class="item">{{ client.phone }}</div>
+                </div>       </div>
+    </div>
+<div class="ui buttons">
+    <a class="ui button" href="{{ path('client_index') }}"><i class="left arrow icon"></i></a>
+<div class="or"></div>
+    <a class="ui button" href="{{ path('client_edit', {'id': client.id}) }}"><i class="pencil icon"></i></a>
+</div>
+      <div style="margin: 2%;">
     {{ include('client/_delete_form.html.twig') }}
+      </div>
+    </div>
 {% endblock %}
