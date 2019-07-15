@@ -3,13 +3,17 @@
 {% block title %}Client index{% endblock %}
 
 {% block body %}
+<div class="ui raised stacked container segments">
+    <div class="ui segment">
+<h1 class="ui header tall center aligned">CLIENT</h1>
 
-<h2>CLIENT
-</h2>
-    <table class="ui table">
+        <a class=" ui button" href="{{ path('client_new') }}"> <i class="plus icon"></i>new</a></div>
+    <div class="ui segment">
+        <h3 class="ui header"style="margin-top: 5%">TOUS</h3>
+    <table class="ui table striped">
         <thead>
             <tr>
-                <th>Id</th>
+
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Mail</th>
@@ -17,13 +21,15 @@
                 <th>Address</th>
                 <th>PostCode</th>
                 <th>City</th>
+                <th>Profile</th>
+                <th>Salon</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td>{{ client.id }}</td>
+
                 <td>{{ client.firstname }}</td>
                 <td>{{ client.lastname }}</td>
                 <td>{{ client.mail }}</td>
@@ -31,9 +37,20 @@
                 <td>{{ client.address }}</td>
                 <td>{{ client.postCode }}</td>
                 <td>{{ client.city }}</td>
+                <td>{{ client.profile }}</td>
+                {% if client.company %}
+                <td>{{ client.company.companyName }}</td>
+
+                {% else%}
+                    <td>-</td>
+                {% endif %}
+
                 <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                    <div class="ui buttons">
+                    <a class="ui button" href="{{ path('client_show', {'id': client.id}) }}"><i class="eye icon"></i> </a>
+                        <div class="or"></div>
+                    <a class="ui button" href="{{ path('client_edit', {'id': client.id}) }}"><i class="pencil icon"></i></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -43,6 +60,102 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
+    <div class="ui segment">
+        <h3 class="ui header"style="margin-top: 5%">SALONS</h3>
+        <table class="ui table striped">
+            <thead>
+            <tr>
+                <th>Salon</th>
 
-    <a href="{{ path('client_new') }}">Create new</a>
+                <th>Mail</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>PostCode</th>
+                <th>City</th>
+
+
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for salon in salons %}
+                <tr>
+                    <td>{{ salon.company.companyName }}</td>
+
+                    <td>{{ salon.mail }}</td>
+                    <td>{{ salon.phone }}</td>
+                    <td>{{ salon.address }}</td>
+                    <td>{{ salon.postCode }}</td>
+                    <td>{{ salon.city }}</td>
+
+
+
+
+
+                    <td>
+                        <div class="ui buttons">
+                            <a class="ui button" href="{{ path('client_show', {'id': salon.id}) }}"><i class="eye icon"></i> </a>
+                            <div class="or"></div>
+                            <a class="ui button" href="{{ path('client_edit', {'id': salon.id}) }}"><i class="pencil icon"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="ui segment">
+        <h3 class="ui header"style="margin-top: 5%">PARTICULIER</h3>
+        <table class="ui table striped">
+            <thead>
+            <tr>
+
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Mail</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>PostCode</th>
+                <th>City</th>
+
+
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for particulier in particuliers %}
+                <tr>
+
+                    <td>{{ particulier.firstname }}</td>
+                    <td>{{ particulier.lastname }}</td>
+                    <td>{{ particulier.mail }}</td>
+                    <td>{{ particulier.phone }}</td>
+                    <td>{{ particulier.address }}</td>
+                    <td>{{ particulier.postCode }}</td>
+                    <td>{{ particulier.city }}</td>
+
+
+                    <td>
+                        <div class="ui buttons">
+                            <a class="ui button" href="{{ path('client_show', {'id': particulier.id}) }}"><i class="eye icon"></i> </a>
+                            <div class="or"></div>
+                            <a class="ui button" href="{{ path('client_edit', {'id': particulier.id}) }}"><i class="pencil icon"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
+

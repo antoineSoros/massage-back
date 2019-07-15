@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Company;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,12 @@ class ClientController extends AbstractController
      */
     public function index(ClientRepository $clientRepository): Response
     {
+        $salons = $clientRepository->findBy(['profile'=>'fd1b3ed1-9f35-11e9-b353-a8a79509a70f']);
+        $particuliers = $clientRepository->findBy(['profile'=>'02c9a9c2-9f36-11e9-b353-a8a79509a70f']);
         return $this->render("client/index.html.twig", [
             'clients' => $clientRepository->findAll(),
+            'salons'=>$salons,
+            'particuliers'=>$particuliers
         ]);
     }
 
@@ -34,17 +39,20 @@ class ClientController extends AbstractController
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($client);
-            $entityManager->flush();
 
+            $entityManager->flush();
             return $this->redirectToRoute('client_index');
         }
 
         return $this->render('client/new.html.twig', [
             'client' => $client,
             'form' => $form->createView(),
+
         ]);
     }
 

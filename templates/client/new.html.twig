@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Client{% endblock %}
+{% block title %}New Client
+
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Client</h1>
-
+    <div class="ui  segments fluid " style="width: 80%;margin-left:10%;">
+        <div class="ui segment center aligned">
+    <h1>Nouveau Client</h1> <a  class="ui button" href="{{ path('client_index') }}"> <i class="left arrow icon"></i>back to list</a>
+        </div>
+        <div class="ui compact segment "style="padding-left: 20%">
     {{ include('client/_form.html.twig') }}
-
-    <a href="{{ path('client_index') }}">back to list</a>
+        </div>
+    </div>
 {% endblock %}
