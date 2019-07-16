@@ -38,20 +38,34 @@ class ClientController extends AbstractController
         $client = new Client();
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
-
+$message="";
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
+            $clients = $entityManager->getRepository(Client::class)->findBy(['mail'=>$client->getMail()]);
+            if(empty($clients)){
             $entityManager->persist($client);
 
             $entityManager->flush();
-            return $this->redirectToRoute('client_index');
+            return $this->redirectToRoute('client_index');}
+            else{
+                $message = "Client existant";
+                return $this->render('client/new.html.twig', [
+                    'client' => $client,
+                    'form' => $form->createView(),
+                    'message'=>$message
+
+                ]);
+
+            }
         }
 
         return $this->render('client/new.html.twig', [
             'client' => $client,
             'form' => $form->createView(),
+            'message'=>null
 
         ]);
     }
