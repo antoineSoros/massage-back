@@ -29,6 +29,11 @@ class Invoice
      */
     private $prestation;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $emitedDate;
+
     public function __construct()
     {
         $this->prestation = new ArrayCollection();
@@ -78,6 +83,18 @@ class Invoice
                 $prestation->setInvoice(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmitedDate(): ?\DateTimeInterface
+    {
+        return $this->emitedDate;
+    }
+
+    public function setEmitedDate(\DateTimeInterface $emitedDate): self
+    {
+        $this->emitedDate = $emitedDate;
 
         return $this;
     }

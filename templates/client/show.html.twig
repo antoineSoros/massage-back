@@ -4,16 +4,29 @@
 
 {% block body %}
     <h1>Client</h1>
-
-    <div class="ui card">
-        <div class="image">
-            <img src="{{ asset('build/images/userIcon.c9b56c09.png') }}">
-        </div>
-        <div class="content">
-            <h4 class="header">
+<div class="ui three column centered grid">
+    <div class="eight wide column">
+    <div class="ui fluid card">
+        <div class="content right floated">
+<h3>
+    {% if client.profile.name == "PARTICULIER" %}
                 {{ client.firstname|upper }} {{ client.lastname |upper}}
-            </h4>
+    {% else %}
+    {{ client.company.companyName |upper }}
+    {% endif %}
+</h3>
+        </div>
+
+
+        <div class="content">
             <div class="description">
+               {% if client.profile.name == "SALON" %}
+                <h5 class="ui header">Gérant</h5>
+                <div class="ui list">
+                    <div class="item">{{ client.company.owner.firstname |upper }} {{ client.company.owner.lastname |upper }}</div>
+                </div>
+                <div class="ui divider"></div>
+                {% endif %}
                 <h5 class="ui header">Adresse</h5>
                <div class="ui list">
                    <div class="item">{{ client.address }}</div>
@@ -31,13 +44,18 @@
                     <div class="item">{{ client.phone }}</div>
                 </div>       </div>
     </div>
-<div class="ui buttons">
+<div class="ui tiny buttons">
     <a class="ui button" href="{{ path('client_index') }}"><i class="left arrow icon"></i></a>
 <div class="or"></div>
-    <a class="ui button" href="{{ path('client_edit', {'id': client.id}) }}"><i class="pencil icon"></i></a>
+    <a class="ui tiny button" href="{{ path('client_edit', {'id': client.id}) }}"><i class="pencil icon"></i></a>
 </div>
-      <div style="margin: 2%;">
+
+
+        <div class="right floated" style="margin: 2%;">
     {{ include('client/_delete_form.html.twig') }}
       </div>
-    </div>
+</div>
+
+</div>
+</div>
 {% endblock %}

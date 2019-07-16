@@ -35,6 +35,11 @@ class InvoiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $emitedDate = new \DateTime('now');
+            $presta = $invoice->getPrestation()[0];
+            $number ="FA". $presta->getPrestationDate()->format("m").$presta->getId();
+            $invoice->setNumber($number);
+            $invoice->setEmitedDate($emitedDate);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($invoice);
             $entityManager->flush();

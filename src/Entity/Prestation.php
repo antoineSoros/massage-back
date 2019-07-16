@@ -11,18 +11,18 @@ class Prestation
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="bigint")
      */
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Client", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Client", cascade={"persist", "remove"})
      */
     private $client;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Massage", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Massage", cascade={"persist", "remove"})
      */
     private $massage;
 
@@ -36,7 +36,7 @@ class Prestation
      */
     private $invoice;
 
-    public function getId(): ?string
+    public function getId(): ?int
     {
         return $this->id;
     }
