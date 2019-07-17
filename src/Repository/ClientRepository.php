@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Client;
+use App\Entity\Profile;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -18,7 +19,12 @@ class ClientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Client::class);
     }
-
+public function findByProfile($profileName){
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.profile','p')
+            ->andWhere('p.name = :name')
+            ->setParameter('name',$profileName)->getQuery()->getResult();
+}
     // /**
     //  * @return Client[] Returns an array of Client objects
     //  */

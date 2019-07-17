@@ -18,7 +18,12 @@ class PrestationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Prestation::class);
     }
-
+public function findPrestationByClient($client){
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.client','client')
+            ->andWhere('client = :client')
+            ->setParameter('client',$client)->getQuery()->getResult();
+}
     // /**
     //  * @return Prestation[] Returns an array of Prestation objects
     //  */

@@ -22,8 +22,9 @@ class ClientController extends AbstractController
      */
     public function index(ClientRepository $clientRepository): Response
     {
-        $salons = $clientRepository->findBy(['profile'=>'fd1b3ed1-9f35-11e9-b353-a8a79509a70f']);
-        $particuliers = $clientRepository->findBy(['profile'=>'02c9a9c2-9f36-11e9-b353-a8a79509a70f']);
+//        $salons = $clientRepository->findBy(['profile'=>'99be0a06-a278-4c41-a774-7558a9c56499']);
+        $salons = $clientRepository->findByProfile('SALON');
+        $particuliers = $clientRepository->findByProfile('PARTICULIER');
         return $this->render("client/index.html.twig", [
             'clients' => $clientRepository->findAll(),
             'salons'=>$salons,
@@ -77,7 +78,7 @@ $message="";
     public function show(Client $client): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $presta = $em->getRepository(Prestation::class)->findBy(['client'=>$client]);
+        $presta = $em->getRepository(Prestation::class)->findPrestationByClient($client);
 
         return $this->render('client/show.html.twig', [
             'client' => $client,
