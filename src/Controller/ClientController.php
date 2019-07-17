@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\Company;
+use App\Entity\Prestation;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,8 +76,12 @@ $message="";
      */
     public function show(Client $client): Response
     {
+        $em = $this->getDoctrine()->getManager();
+        $presta = $em->getRepository(Prestation::class)->findBy(['client'=>$client]);
+
         return $this->render('client/show.html.twig', [
             'client' => $client,
+            'presta'=>$presta
         ]);
     }
 

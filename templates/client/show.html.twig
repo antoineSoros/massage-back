@@ -42,6 +42,17 @@
                 <h5 class="ui header">Téléphone</h5>
                 <div class="ui list">
                     <div class="item">{{ client.phone }}</div>
+
+                    <div class="ui divider"></div>
+                    <h5 class="ui header">Prestation</h5>
+                    <div class="ui list">
+                    {% for pr in presta %}
+                        <div class="item">{{ pr.prestationDate|date("d/m/Y") }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="ui divider"></div>
+
                 </div>       </div>
     </div>
 <div class="ui tiny buttons">
