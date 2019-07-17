@@ -38,6 +38,10 @@ class InvoiceController extends AbstractController
             $emitedDate = new \DateTime('now');
             $presta = $invoice->getPrestation()[0];
             $number ="FA". $presta->getPrestationDate()->format("m").$presta->getId();
+            $prestaList = $invoice->getPrestation();
+            foreach ($prestaList as $pr){
+                $pr->setInvoice($invoice);
+            }
             $invoice->setNumber($number);
             $invoice->setEmitedDate($emitedDate);
             $entityManager = $this->getDoctrine()->getManager();
