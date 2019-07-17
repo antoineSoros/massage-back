@@ -3,12 +3,20 @@
 {% block title %}Prestation index{% endblock %}
 
 {% block body %}
-    <h1>Prestation index</h1>
+<div class="ui raised  container segment">
+    <h1 class="ui header tall center aligned">PRESTATION</h1>
 
-    <table class="table">
+    <a class=" ui button" href="{{ path('prestation_new') }}"> <i class="plus icon"></i>new</a></div>
+<div class="ui raised  container segment">
+    <h3 class="ui header"style="margin-top: 5%">TOUTES</h3>
+    <table class="ui table striped">
         <thead>
+        <tr>
             <tr>
                 <th>Id</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Facture n°</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,9 +24,20 @@
         {% for prestation in prestations %}
             <tr>
                 <td>{{ prestation.id }}</td>
+                <td>{{ prestation.prestationDate |date('d/m/Y - H:m') }}</td>
+                <td>{{ prestation.massage.type }}</td>
+                {% if prestation.invoice != null %}
+                    <td>{{ prestation.invoice.number}}</td>
+
+                {% else %}
+                    <td>-</td>
+                {% endif %}
                 <td>
-                    <a href="{{ path('prestation_show', {'id': prestation.id}) }}">show</a>
-                    <a href="{{ path('prestation_edit', {'id': prestation.id}) }}">edit</a>
+                    <div class="ui buttons">
+                    <a class="ui button" href="{{ path('prestation_show', {'id': prestation.id}) }}"><i class="eye icon"></i></a>
+                        <div class="or"></div>
+                    <a class="ui button" href="{{ path('prestation_edit', {'id': prestation.id}) }}"><i class="pencil icon"></i></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -29,5 +48,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('prestation_new') }}">Create new</a>
+
+</div>
 {% endblock %}

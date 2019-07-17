@@ -51,7 +51,7 @@
                         {% endfor %}
                     </div>
                       {% for pr in presta %}
-                    <div class="item">{{ pr.PrestationDate|date("d/m/y - H:m") }} {{ pr.massage }}</div>
+                    <div class="item">{{ pr.PrestationDate|date("d/m/y - H:m") }}   -  {{ pr.massage }}</div>
                     {% endfor %}
                     <div class="ui divider"></div>
 
