@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
@@ -23,6 +24,39 @@ class CompanyController extends AbstractController
         return $this->render('company/index.html.twig', [
             'companies' => $companyRepository->findAll(),
         ]);
+    }
+    /**
+     * @Route("/{ownerId}", name="company_new_owner", methods={"GET","POST"})
+     * @param Request $request
+     * @param string $ownerId
+     * @return Response
+     */
+    public function newByClient(Request $request , $ownerId): Response
+    {
+        $owner= $this->getDoctrine()->getManager()->getRepository(Client::class)->find($ownerId);
+        $salon = new Company();
+        $salon ->setOwner($owner)
+            ->setMail($owner->getMail())
+            ->setPhone($owner->getPhone())
+            ->setAddress($owner->getAddress())
+            ->setPostCode($owner->getPostCode())
+            ->setCity($owner->getCity());
+        $form = $this->createForm(CompanyType::class, $salon);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($salon);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('client_index');
+        }
+
+        return $this->render('company/new.html.twig', [
+            'company' => $salon,
+            'form' => $form->createView(),
+        ]);
+
     }
 
     /**
@@ -57,6 +91,8 @@ class CompanyController extends AbstractController
             'company' => $company,
         ]);
     }
+
+
 
     /**
      * @Route("/{id}/edit", name="company_edit", methods={"GET","POST"})
