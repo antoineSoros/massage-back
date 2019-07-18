@@ -168,9 +168,16 @@ class Client
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString()
     {
-        return $this->getFirstname()." ".$this->getLastname();
+        if( $this->getCompany() === null && $this->getProfile()->getName()==="PARTICULIER" ){
+        return $this->getFirstname()." ".$this->getLastname();}
+        else{
+            return $this->getCompany()->getCompanyName();
+        }
     }
 
     public function getCompany(): ?Company
