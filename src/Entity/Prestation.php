@@ -93,9 +93,10 @@ class Prestation
     {
         $date = $this->getPrestationDate()->format("d/m/Y H:i");
         $client="" ;
-        if($this->getClient()->getProfile()->getName()==="SALON"){ $client = $this->getClient()->getCompany()->getCompanyName();}
+        if($this->getClient()->getProfile()->getName()==="SALON"){ $client = $this->getClient()->getCompany()->getCompanyName()
+        ." n° ".$this->getId();}
         else{
-            $client = $this->getClient()->getFirstname()." ".$this->getClient()->getLastname();
+            $client = $this->getClient()->getFirstname()." ".$this->getClient()->getLastname()." n° ".$this->getId();
         }
 
      return "prestation du ".$date." pour ".$client;
