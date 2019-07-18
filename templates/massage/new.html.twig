@@ -3,9 +3,15 @@
 {% block title %}New Massage{% endblock %}
 
 {% block body %}
-    <h1>Create new Massage</h1>
+    <div class="ui  segments fluid " style="width: 80%;margin-left:10%;">
+        <div class="ui segment center aligned">
+            <h1>Nouveau Massage</h1> <a  class="ui button" href="{{ path('massage_index') }}"> <i class="left arrow icon"></i>back to list</a>
+        </div>
 
-    {{ include('massage/_form.html.twig') }}
+        <div class="ui compact segment "style="padding-left: 20%">
+            {{ include('massage/_form.html.twig') }}
+        </div>
+    </div>
 
-    <a href="{{ path('massage_index') }}">back to list</a>
+
 {% endblock %}

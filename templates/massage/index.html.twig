@@ -3,28 +3,36 @@
 {% block title %}Massage index{% endblock %}
 
 {% block body %}
-    <h1>Massage index</h1>
+<div class="ui raised  container segment">
+    <h1 class="ui header tall center aligned">Massage</h1>
 
-    <table class="table">
+    <a class=" ui button" href="{{ path('massage_new') }}"> <i class="plus icon"></i>new</a></div>
+<div class="ui raised  container segment">
+    <h3 class="ui header"style="margin-top: 5%">TOUS</h3>
+    <table class="ui table striped">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>HtPrice</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+
+            <th>TYPE</th>
+            <th>Prix H.T</th>
+            <th>Action</th>
+
+        </tr>
         </thead>
         <tbody>
         {% for massage in massages %}
-            <tr>
-                <td>{{ massage.id }}</td>
-                <td>{{ massage.type }}</td>
-                <td>{{ massage.htPrice }}</td>
-                <td>
-                    <a href="{{ path('massage_show', {'id': massage.id}) }}">show</a>
-                    <a href="{{ path('massage_edit', {'id': massage.id}) }}">edit</a>
-                </td>
-            </tr>
+        <tr>
+
+            <td>{{ massage.type}}</td>
+            <td>{{ massage.htPrice }}</td>
+            <td>
+                <div class="ui buttons">
+                    <a class="ui button" href="{{ path('massage_show', {'id': massage.id}) }}"><i class="eye icon"></i> </a>
+                    <div class="or"></div>
+                    <a class="ui button" href="{{ path('massage_edit', {'id': massage.id}) }}"><i class="pencil icon"></i></a>
+                </div>
+            </td>
+        </tr>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
@@ -33,5 +41,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('massage_new') }}">Create new</a>
+</div>
+
 {% endblock %}

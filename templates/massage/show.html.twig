@@ -3,28 +3,36 @@
 {% block title %}Massage{% endblock %}
 
 {% block body %}
-    <h1>Massage</h1>
+    <h1>massage</h1>
+    <div class="ui three column centered grid">
+        <div class="eight wide column">
+            <div class="ui fluid card">
+                <div class="content right floated">
+                    <h3>
+                       {{ massage.type|upper }}
+                    </h3>
+                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ massage.id }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ massage.type }}</td>
-            </tr>
-            <tr>
-                <th>HtPrice</th>
-                <td>{{ massage.htPrice }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('massage_index') }}">back to list</a>
+                <div class="content">
+                    <div class="description">
+                        Prix: {{ massage.htPrice }}
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui buttons">
+                    <a class="ui small button" href="{{ path('massage_index') }}"><i class="left arrow icon"></i></a>
+                    <div class="or"></div>
+                    <a class="ui small button" href="{{ path('massage_edit', {'id': massage.id}) }}"><i class="pencil icon"></i></a>
+                </div>
 
-    <a href="{{ path('massage_edit', {'id': massage.id}) }}">edit</a>
 
-    {{ include('massage/_delete_form.html.twig') }}
+                <div class="right floated" style="margin: 2%;">
+                    {{ include('massage/_delete_form.html.twig') }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 {% endblock %}
