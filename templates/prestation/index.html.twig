@@ -24,7 +24,7 @@
         {% for prestation in prestations %}
             <tr>
                 <td>{{ prestation.id }}</td>
-                <td>{{ prestation.prestationDate |date('d/m/Y - H:m') }}</td>
+                <td>{{ prestation.prestationDate |date('d/m/Y ') }} de {{ prestation.startTime | date("H:i") }} à {{ prestation.endTime | date("H:i") }}</td>
                 <td>{{ prestation.massage.type }}</td>
                 {% if prestation.invoice != null %}
                     <td>{{ prestation.invoice.number}}</td>

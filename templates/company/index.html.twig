@@ -3,35 +3,39 @@
 {% block title %}Company index{% endblock %}
 
 {% block body %}
-    <h1>Company index</h1>
+<div class="ui raised  container segment">
+    <h1 class="ui header tall center aligned">SALON</h1>
 
-    <table class="table">
+    <a class=" ui button" href="{{ path('client_new') }}"> <i class="plus icon"></i>new</a></div>
+<div class="ui raised  container segment">
+    <h3 class="ui header"style="margin-top: 5%">TOUS</h3>
+    <table class="ui table striped">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>CompanyName</th>
-                <th>Address</th>
-                <th>PostCode</th>
-                <th>City</th>
-                <th>Phone</th>
-                <th>Mail</th>
-                <th>actions</th>
+        <tr>
+            <th>Nom</th>
+            <th>Contact</th>
+            <th>Tél</th>
+            <th>Mail</th>
+            <th>Adresse</th>
+            <th>CP</th>
+            <th>Ville</th>
+            <th>Action</th>
             </tr>
         </thead>
         <tbody>
         {% for company in companies %}
             <tr>
-                <td>{{ company.id }}</td>
                 <td>{{ company.companyName }}</td>
+                <td>{{ company.owner }}</td>
+                <td>{{ company.phone }}</td>
+                <td>{{ company.mail }}</td>
                 <td>{{ company.address }}</td>
                 <td>{{ company.postCode }}</td>
                 <td>{{ company.city }}</td>
-                <td>{{ company.phone }}</td>
-                <td>{{ company.mail }}</td>
                 <td>
-                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
-                </td>
+
+                        <a class="ui button" href="{{ path('company_edit', {'id': company.id}) }}"><i class="pencil icon"></i></a>
+                    </td>
             </tr>
         {% else %}
             <tr>
@@ -40,6 +44,6 @@
         {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('company_new') }}">Create new</a>
 {% endblock %}

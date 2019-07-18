@@ -34,6 +34,11 @@ class Invoice
      */
     private $emitedDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="invoices")
+     */
+    private $invoiceStatus;
+
     public function __construct()
     {
         $this->prestation = new ArrayCollection();
@@ -95,6 +100,18 @@ class Invoice
     public function setEmitedDate(\DateTimeInterface $emitedDate): self
     {
         $this->emitedDate = $emitedDate;
+
+        return $this;
+    }
+
+    public function getInvoiceStatus(): ?Status
+    {
+        return $this->invoiceStatus;
+    }
+
+    public function setInvoiceStatus(?Status $invoiceStatus): self
+    {
+        $this->invoiceStatus = $invoiceStatus;
 
         return $this;
     }

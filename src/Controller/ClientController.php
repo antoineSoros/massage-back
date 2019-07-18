@@ -47,12 +47,7 @@ $message="";
 
             $entityManager = $this->getDoctrine()->getManager();
             $clients = $entityManager->getRepository(Client::class)->findBy(['mail'=>$client->getMail()]);
-            if(empty($clients)){
-            $entityManager->persist($client);
-
-            $entityManager->flush();
-            return $this->redirectToRoute('client_index');}
-            else{
+            if(!empty($clients)){
                 $message = "Client existant";
                 return $this->render('client/new.html.twig', [
                     'client' => $client,
@@ -60,6 +55,16 @@ $message="";
                     'message'=>$message
 
                 ]);
+           }
+            else{
+                $entityManager->persist($client);
+
+                $entityManager->flush();
+                if ($client->getProfile()!== null && $client->getProfile()->getName()==="SALON"){
+                    return $this->redirectToRoute('company_new_owner',['ownerId' =>$client->getId()]);
+                }
+                return $this->redirectToRoute('client_index');
+
 
             }
         }

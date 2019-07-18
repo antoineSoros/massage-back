@@ -3,11 +3,18 @@
 {% block title %}Edit Company{% endblock %}
 
 {% block body %}
+<div class="ui  segments fluid " style="width: 80%;margin-left:10%;">
+<div class="ui segment center aligned">
     <h1>Edit Company</h1>
-
-    {{ include('company/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('company_index') }}">back to list</a>
+<div class="ui centered buttons">
+    <a class="ui button" href="{{ path('company_index') }}"><i class="left arrow icon"></i></a>
+    <div class="or"></div>
 
     {{ include('company/_delete_form.html.twig') }}
+</div>
+</div>
+    <div class="ui compact segment "style="padding-left: 20%">
+        {{ include('company/_form.html.twig', {'button_label': 'Update'}) }}
+</div>
+</div>
 {% endblock %}

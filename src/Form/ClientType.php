@@ -21,7 +21,7 @@ class ClientType extends AbstractType
             ->add('postCode')
             ->add('city')
             ->add('profile')
-            ->add('company')
+
         ;
     }
 
