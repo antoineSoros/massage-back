@@ -173,7 +173,7 @@ class Client
      */
     public function __toString()
     {
-        if( $this->getCompany() === null && $this->getProfile()->getName()==="PARTICULIER" ){
+        if( $this->getCompany() === null || $this->getProfile()->getName()==="PARTICULIER" ){
         return $this->getFirstname()." ".$this->getLastname();}
         else{
             return $this->getCompany()->getCompanyName();

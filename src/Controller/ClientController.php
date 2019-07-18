@@ -56,8 +56,6 @@ $message="";
 
                 ]);
            }
-
-
             else{
                 $entityManager->persist($client);
 
