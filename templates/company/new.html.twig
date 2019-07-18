@@ -3,9 +3,13 @@
 {% block title %}New Company{% endblock %}
 
 {% block body %}
-    <h1>Create new Company</h1>
-
+<div class="ui  segments fluid " style="width: 80%;margin-left:10%;">
+    <div class="ui segment center aligned">
+        <h1>Nouveau SALON</h1> <a  class="ui button" href="{{ path('company_index') }}"> <i class="left arrow icon"></i>back to list</a>
+    </div>
+    <div class="ui compact segment "style="padding-left: 20%">
     {{ include('company/_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('company_index') }}">back to list</a>
+</div>
 {% endblock %}
