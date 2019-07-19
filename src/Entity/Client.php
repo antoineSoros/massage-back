@@ -174,9 +174,9 @@ class Client
     public function __toString()
     {
         if( $this->getCompany() === null || $this->getProfile()->getName()==="PARTICULIER" ){
-        return $this->getFirstname()." ".$this->getLastname();}
+        return strtoupper($this->getFirstname()." ".$this->getLastname());}
         else{
-            return $this->getCompany()->getCompanyName();
+            return strtoupper( $this->getCompany()->getCompanyName()."-".$this->getFirstname()." ".$this->getLastname());
         }
     }
 

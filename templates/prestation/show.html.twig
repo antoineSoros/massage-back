@@ -1,22 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Prestation{% endblock %}
+{% block title %}PRESTATION{% endblock %}
 
 {% block body %}
-    <h1>Prestation</h1>
+    <h1>PRESTATION</h1>
+    <div class="ui three column centered grid">
+        <div class="eight wide column">
+            <div class="ui fluid card">
+                <div class="content right floated">
+                    <h2 class="ui right floated header">
+                        Prestation n°{{ prestation.id }}
+                    </h2>
+                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ prestation.id }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('prestation_index') }}">back to list</a>
+                <div class="content">
+                    <div class="description">
+                        <div class="ui header">
+                            <h3>Date</h3>
 
-    <a href="{{ path('prestation_edit', {'id': prestation.id}) }}">edit</a>
+                        </div>
 
-    {{ include('prestation/_delete_form.html.twig') }}
+                            <div class="item "> Le: {{ prestation.prestationDate | date('d/m/Y') }}</div>
+                            <div class="item ">De {{ prestation.startTime |date('H:i') }}
+                                À {{ prestation.endTime | date('H:i') }}</div>
+
+                        <div class="ui divider"></div>
+                        <div class="ui header">
+                            <h3>Style</h3>
+                        </div>
+                        <div>{{ prestation.massage.type | upper }}</div>
+                        <div class="ui divider"></div>
+                        <div class="header">
+                            <h3>Client</h3>
+                            {% if prestation.client.company != null %}
+                            <div>{{ prestation.client.company.companyName |upper }}</div>
+                            {% else %}
+                                <div>{{ prestation.client }}</div>
+                            {% endif %}
+                         </div>
+                        <div class="ui divider"></div>
+                        <div class="header">
+                            <h3>Adresse</h3>
+                            <div>{{ prestation.client.address }}</div>
+                            <div>{{ prestation.client.postCode }}</div>
+                            <div>{{ prestation.client.city }}</div>
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="header">
+                            <h3>Coordonnées</h3>
+                            <div class="ui icon"><i class="phone icon"></i>: {{  prestation.client.phone }}</div>
+                            <div class="ui icon"><i class="mail icon"></i>: {{  prestation.client.mail }}</div>
+                            <div class="ui divider"></div>
+                            <div class="header">
+                                <h3>Facture</h3>
+                            {% if prestation.invoice != null %}
+                                <div>n° {{ prestation.invoice.number }} émise le : {{  prestation.invoice.emitedDate |date('dd/M/Y') }}</div>
+                                {% if prestation.invoice.invoiceStatus != null %}
+                                    <div>Statut: {{prestation.invoice.invoiceStatus  }}</div>
+                                    {% else %}
+                                        <div>Statut: - </div>
+                                    {% endif %}
+                                {% else %}
+                                <div>Non émises</div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui buttons">
+                    <a class="ui small button" href="{{ path('prestation_index') }}"><i class="left arrow icon"></i></a>
+                    <div class="or"></div>
+                    <a class="ui small button" href="{{ path('prestation_edit', {'id': prestation.id}) }}"><i class="pencil icon"></i></a>
+                </div>
+
+
+                <div class="right floated" style="margin: 2%;">
+                    {{ include('prestation/_delete_form.html.twig') }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
 {% endblock %}
