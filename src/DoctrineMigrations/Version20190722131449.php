@@ -22,8 +22,7 @@ final class Version20190722131449 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SEQUENCE status_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE prestation_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+
         $this->addSql('CREATE TABLE invoice (id UUID NOT NULL, invoice_status_id INT DEFAULT NULL, number VARCHAR(255) NOT NULL, emited_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_90651744E58F121 ON invoice (invoice_status_id)');
         $this->addSql('CREATE TABLE company (id UUID NOT NULL, owner_id UUID DEFAULT NULL, company_name VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, post_code VARCHAR(255) NOT NULL, city VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, mail VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
