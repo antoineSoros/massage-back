@@ -26,7 +26,7 @@ class ClientController extends AbstractController
         $salons = $clientRepository->findByProfile('SALON');
         $particuliers = $clientRepository->findByProfile('PARTICULIER');
         return $this->render("client/index.html.twig", [
-            'clients' => $clientRepository->findAll(),
+            'clients' => $clientRepository->findBy([],['lastname'=>'asc']),
             'salons'=>$salons,
             'particuliers'=>$particuliers
         ]);

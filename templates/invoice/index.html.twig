@@ -3,33 +3,55 @@
 {% block title %}Invoice index{% endblock %}
 
 {% block body %}
-    <h1>Invoice index</h1>
+    <div class="ui raised  container segment">
+        <h1 class="ui header tall center aligned">INVOICE</h1>
 
-    <table class="table">
-        <thead>
+        <a class=" ui button" href="{{ path('invoice_new') }}"> <i class="plus icon"></i>new</a></div>
+    <div class="ui raised  container segment">
+        <h3 class="ui header"style="margin-top: 5%">TOUTES</h3>
+        <table class="ui table striped">
+            <thead>
+            <tr>
             <tr>
                 <th>Id</th>
-                <th>Number</th>
+                <th>Numéro</th>
+                <th>Client</th>
+                <th>Statut</th>
+                <th>Montant</th>
+                <th>Date Émission</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for invoice in invoices %}
-            <tr>
-                <td>{{ invoice.id }}</td>
-                <td>{{ invoice.number }}</td>
-                <td>
-                    <a href="{{ path('invoice_show', {'id': invoice.id}) }}">show</a>
-                    <a href="{{ path('invoice_edit', {'id': invoice.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.id }}</td>
+                    <td>{{ invoice.number }} </td>
+                    <td>{{ invoice.prestation[0].client }}</td>
+                    {% if invoice.invoiceStatus != null %}
+                        <td>{{ invoice.invoiceStatus}}</td>
 
-    <a href="{{ path('invoice_new') }}">Create new</a>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    <td>feat coming soon</td>
+                    <td>{{ invoice.emitedDate|date('d/m/Y') }}</td>
+                    <td>
+                        <div class="ui buttons">
+                            <a class="ui button" href="{{ path('invoice_show', {'id': invoice.id}) }}"><i class="eye icon"></i></a>
+                            <div class="or"></div>
+                            <a class="ui button" href="{{ path('invoice_edit', {'id': invoice.id}) }}"><i class="pencil icon"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
 {% endblock %}
