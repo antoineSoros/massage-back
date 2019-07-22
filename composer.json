@@ -65,9 +65,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "compile":[
-            "php bin/console doctrine:migration:migrate"
-        ],
+
 
 
 
