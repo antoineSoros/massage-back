@@ -26,7 +26,7 @@ class ClientController extends AbstractController
         $salons = $clientRepository->findByProfile('SALON');
         $particuliers = $clientRepository->findByProfile('PARTICULIER');
         return $this->render("client/index.html.twig", [
-            'clients' => $clientRepository->findAll(),
+            'clients' => $clientRepository->findBy([],['lastname'=>'asc']),
             'salons'=>$salons,
             'particuliers'=>$particuliers
         ]);
@@ -47,12 +47,7 @@ $message="";
 
             $entityManager = $this->getDoctrine()->getManager();
             $clients = $entityManager->getRepository(Client::class)->findBy(['mail'=>$client->getMail()]);
-            if(empty($clients)){
-            $entityManager->persist($client);
-
-            $entityManager->flush();
-            return $this->redirectToRoute('client_index');}
-            else{
+            if(!empty($clients)){
                 $message = "Client existant";
                 return $this->render('client/new.html.twig', [
                     'client' => $client,
@@ -60,6 +55,16 @@ $message="";
                     'message'=>$message
 
                 ]);
+           }
+            else{
+                $entityManager->persist($client);
+
+                $entityManager->flush();
+                if ($client->getProfile()!== null && $client->getProfile()->getName()==="SALON"){
+                    return $this->redirectToRoute('company_new_owner',['ownerId' =>$client->getId()]);
+                }
+                return $this->redirectToRoute('client_index');
+
 
             }
         }

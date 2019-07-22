@@ -44,14 +44,12 @@
                     <div class="item">{{ client.phone }}</div>
 
                     <div class="ui divider"></div>
+                </div>
                     <h5 class="ui header">Prestation</h5>
                     <div class="ui list">
-                    {% for pr in presta %}
-                        <div class="item">{{ pr.prestationDate|date("d/m/Y") }}</div>
-                        {% endfor %}
-                    </div>
+
                       {% for pr in presta %}
-                    <div class="item">{{ pr.PrestationDate|date("d/m/y - H:m") }}   -  {{ pr.massage }}</div>
+                    <div class="item">{{ pr.prestationDate|date("d/m/y ") }} - {{ pr.startTime|date("H:i") }}  -  {{ pr.massage }}</div>
                     {% endfor %}
                     <div class="ui divider"></div>
 

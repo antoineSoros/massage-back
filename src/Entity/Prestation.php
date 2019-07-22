@@ -36,6 +36,16 @@ class Prestation
      */
     private $invoice;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $startTime;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $endTime;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,12 +103,37 @@ class Prestation
     {
         $date = $this->getPrestationDate()->format("d/m/Y H:i");
         $client="" ;
-        if($this->getClient()->getProfile()->getName()==="SALON"){ $client = $this->getClient()->getCompany()->getCompanyName();}
+        if($this->getClient()->getProfile()->getName()==="SALON"){ $client = $this->getClient()->getCompany()->getCompanyName()
+        ." n° ".$this->getId();}
         else{
-            $client = $this->getClient()->getFirstname()." ".$this->getClient()->getLastname();
+            $client = $this->getClient()->getFirstname()." ".$this->getClient()->getLastname()." n° ".$this->getId();
         }
 
      return "prestation du ".$date." pour ".$client;
+    }
+
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(\DateTimeInterface $startTime): self
+    {
+        $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    public function getEndTime(): ?\DateTimeInterface
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime(\DateTimeInterface $endTime): self
+    {
+        $this->endTime = $endTime;
+
+        return $this;
     }
 
 }

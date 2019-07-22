@@ -3,12 +3,18 @@
 {% block title %}Edit Client{% endblock %}
 
 {% block body %}
+<div class="ui  segments fluid " style="width: 80%;margin-left:10%;">
+    <div class="ui segment center aligned">
     <h1>Edit Client</h1>
     <div class="ui centered buttons">
         <a class="ui button" href="{{ path('client_index') }}"><i class="left arrow icon"></i></a>
         <div class="or"></div>
+
         {{ include('client/_delete_form.html.twig') }}
     </div>
+    </div>
+    <div class="ui compact segment "style="padding-left: 20%">
     {{ include('client/_form.html.twig', {'button_label': 'Update'}) }}
-
+    </div>
+</div>
 {% endblock %}

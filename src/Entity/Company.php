@@ -56,6 +56,9 @@ class Company
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCompanyName(): ?string
     {
         return $this->companyName;
