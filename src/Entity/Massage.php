@@ -26,6 +26,11 @@ class Massage
      */
     private $htPrice;
 
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $htPriceSalon;
+
 
 
     public function getId(): ?string
@@ -60,6 +65,18 @@ class Massage
     public function __toString()
     {
     return $this->type;
+    }
+
+    public function getHtPriceSalon()
+    {
+        return $this->htPriceSalon;
+    }
+
+    public function setHtPriceSalon($htPriceSalon): self
+    {
+        $this->htPriceSalon = $htPriceSalon;
+
+        return $this;
     }
 
 }
